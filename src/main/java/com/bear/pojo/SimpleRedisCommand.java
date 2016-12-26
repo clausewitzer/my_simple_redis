@@ -57,4 +57,32 @@ public class SimpleRedisCommand {
                 ", arg2=" + Arrays.toString(arg2) +
                 '}';
     }
+
+    /**
+     * 将解析后的协议封装 成供反射执行的对象
+     *
+     * @param types
+     * @param objects
+     */
+    public void setInvokeParams(Class<?>[] types, Object[] objects) {
+
+        int position = 0;
+
+        for (Class<?> type : types) {
+            //目前只支持简单的操作 byte[]数组为参数的操作
+            if (type == byte[].class) {
+                if (position >= objects.length) {
+                    throw new IllegalArgumentException("wrong number of agruments for " + name + " command");//非法的参数命令
+                }
+                objects[position] = listCommand.get(position + 1);
+            } else {
+
+                //TODO 支持复杂的操作参数
+
+            }
+            position++;
+        }
+
+
+    }
 }

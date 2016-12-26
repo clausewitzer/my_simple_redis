@@ -1,4 +1,4 @@
-package com.bear.pojo;
+package com.bear.pojo.replay;
 
 import io.netty.buffer.ByteBuf;
 
